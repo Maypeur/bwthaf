@@ -1,0 +1,18 @@
+{
+    "domain": "bwthaf",
+    "name": "BWT Home Assistant Fetcher",    
+    "documentation": "https://github.com/Maypeur/bwthaf",
+    "issue_tracker": "https://github.com/Maypeur/bwthaf/issues",
+    "codeowners": [
+        "@Maypeur"
+    ],
+    "config_flow": true,
+    "dependencies": [],
+    "requirements": [
+        "requests>=2.31.0",
+        "beautifulsoup4>=4.12.0",
+        "lxml>=4.9.0"
+    ],
+    "version": "1.0.0",
+    "iot_class": "cloud_polling"
+}

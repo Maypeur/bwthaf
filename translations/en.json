@@ -1,0 +1,39 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "BWT Water Softener",
+        "description": "Configure your BWT water softener",
+        "data": {
+          "username": "BWT Mon Service Username (email)",
+          "password": "Password",
+          "serial_number": "Device Serial Number",
+          "device_name": "Device Name",
+          "interval_main": "Main update interval (seconds)",
+          "interval_consumption": "Consumption update interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "required": "This field is required",
+      "auth": "Authentication failed",
+      "cannot_connect": "Failed to connect",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "Device is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "BWT Options",
+        "description": "Configure update intervals",
+        "data": {
+          "interval_main": "Main update interval (seconds)",
+          "interval_consumption": "Consumption update interval (seconds)"
+        }
+      }
+    }
+  }
+}

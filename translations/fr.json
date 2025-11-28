@@ -1,0 +1,39 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Adoucisseur BWT",
+        "description": "Configurez votre adoucisseur BWT",
+        "data": {
+          "username": "Identifiant BWT Mon Service (email)",
+          "password": "Mot de passe",
+          "serial_number": "Numéro de série de l'appareil",
+          "device_name": "Nom de l'appareil",
+          "interval_main": "Intervalle de mise à jour principal (secondes)",
+          "interval_consumption": "Intervalle de mise à jour consommation (secondes)"
+        }
+      }
+    },
+    "error": {
+      "required": "Ce champ est obligatoire",
+      "auth": "Échec de l'authentification",
+      "cannot_connect": "Impossible de se connecter",
+      "unknown": "Erreur inattendue"
+    },
+    "abort": {
+      "already_configured": "L'appareil est déjà configuré"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options BWT",
+        "description": "Configurez les intervalles de mise à jour",
+        "data": {
+          "interval_main": "Intervalle de mise à jour principal (secondes)",
+          "interval_consumption": "Intervalle de mise à jour consommation (secondes)"
+        }
+      }
+    }
+  }
+}
