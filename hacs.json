@@ -1,0 +1,5 @@
+{
+  "name": "BWT Home Assistant Fetcher",
+  "render_readme": true,
+  "domains": ["bwthaf"]
+}
