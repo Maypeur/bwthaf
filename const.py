@@ -26,6 +26,7 @@ BWT_DASHBOARD_URL = f"{BWT_BASE_URL}/dashboard"
 BWT_DEVICE_URL = f"{BWT_BASE_URL}/device"
 BWT_SUMMARY_URL = f"{BWT_BASE_URL}/ajax/product-summary"
 BWT_LOAD_CONSO_URL = f"{BWT_BASE_URL}/_components/DeviceTabs/loadConso"
+BWT_AJAX_CHART_URL = f"{BWT_BASE_URL}/device/ajaxChart"
 
 # Sensor types
 SENSOR_TYPES = {
@@ -144,3 +145,57 @@ BINARY_SENSOR_TYPES = {
         "icon": "mdi:power-plug-off",
     },
 }
+
+MQTT_TOPIC_PREFIX = "bwt"
+UNIT_SCALE_THRESHOLD = 1000
+MASS_SENSOR_KEYS = frozenset({"salt", "salt_consumption"})
+VOLUME_SENSOR_KEYS = frozenset(
+    {"vol_ok", "water_consumption", "water_increment", "resin_vol"}
+)
+
+
+def _as_number(value):
+    if value is None or value == "":
+        return None
+    if isinstance(value, bool):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def scale_mass_g(value):
+    """Show kilograms once the mass reaches 1000 g."""
+    raw = _as_number(value)
+    if raw is None:
+        return None, "g"
+    if raw >= UNIT_SCALE_THRESHOLD:
+        return round(raw / 1000.0, 3), "kg"
+    return int(raw) if raw == int(raw) else raw, "g"
+
+
+def scale_volume_l(value):
+    """Show cubic meters once the volume reaches 1000 L."""
+    raw = _as_number(value)
+    if raw is None:
+        return None, "L"
+    if raw >= UNIT_SCALE_THRESHOLD:
+        return round(raw / 1000.0, 3), "m³"
+    return int(raw) if raw == int(raw) else raw, "L"
+
+
+def quantity_mass(value):
+    raw = _as_number(value)
+    if raw is None:
+        return None
+    display, unit = scale_mass_g(raw)
+    return {"value": display, "unit": unit, "g": int(round(raw))}
+
+
+def quantity_volume(value):
+    raw = _as_number(value)
+    if raw is None:
+        return None
+    display, unit = scale_volume_l(raw)
+    return {"value": display, "unit": unit, "L": int(round(raw))}

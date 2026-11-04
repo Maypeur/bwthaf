@@ -28,10 +28,10 @@
     "step": {
       "init": {
         "title": "BWT Options",
-        "description": "Configure update intervals",
+        "description": "Account: {username}\nSerial number: {serial_number}\nName: {device_name}\n\nCurrent intervals: status {interval_main} s, consumption {interval_consumption} s.",
         "data": {
-          "interval_main": "Main update interval (seconds)",
-          "interval_consumption": "Consumption update interval (seconds)"
+          "interval_main": "Main update interval",
+          "interval_consumption": "Consumption update interval"
         }
       }
     }

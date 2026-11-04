@@ -5,7 +5,7 @@ Attention, testé uniquement avec My Perla Optimum
 
 ## Description
 
-BWTHAF (BWT Home Assistant Fetcher) est un add-on qui se connecte au service BWT Mon Service pour récupérer les données de votre adoucisseur d'eau BWT et les expose dans Home Assistant via MQTT.
+BWTHAF (BWT Home Assistant Fetcher) est une intégration personnalisée qui se connecte au service BWT Mon Service pour récupérer les données de votre adoucisseur d'eau BWT et les expose dans Home Assistant (capteurs natifs, statistiques quotidiennes, et MQTT optionnel si un broker est configuré).
 
 ## Installation
 
@@ -69,7 +69,7 @@ L'add-on expose les métriques suivantes dans Home Assistant :
 | Consommation d'Eau Journalière | `sensor.bwt_XXXXX_water_consumption` | Consommation d'eau du jour | L |
 | Incrément Eau | `sensor.bwt_XXXXX_water_increment` | Eau consommée depuis la dernière mesure | L |
 | Nombre de Régénérations | `sensor.bwt_XXXXX_regen_count` | Nombre de régénérations effectuées | - |
-| Consommation de Sel | `sensor.bwt_XXXXX_salt_consumption` | Quantité totale de sel consommée | g |
+| Consommation de Sel | `sensor.bwt_XXXXX_salt_consumption` | Quantité totale de sel consommée (historique BWT) | g (affichage kg si ≥ 1000 g) |
 | Date Dernière Mise à Jour | `sensor.bwt_XXXXX_last_update` | Horodatage de la dernière mise à jour | - |
 
 *Note : XXXXX représente votre numéro de série*
@@ -84,10 +84,15 @@ Le sensor `sensor.bwt_XXXXX_water_increment` indique la quantité d'eau consomm�
 
 ### Consommation de sel
 
-La consommation de sel est calculée automatiquement par la formule :
+La consommation de sel est calculée sur tout l'historique quotidien BWT :
 ```
-Consommation de sel = Nombre de régénérations × Sel par régénération
+sel du jour = régénérations du jour × sel par régénération
+sel cumulé  = somme des sels journaliers
 ```
+
+Au-delà de 1000 g / 1000 L, Home Assistant peut afficher kg / m³. Les graphiques jour par jour utilisent les statistiques `bwthaf:water_<serial>` et `bwthaf:salt_<serial>`.
+
+Si l'intégration MQTT de Home Assistant est active, l'état et l'historique sont aussi publiés (retain) sur `bwt/<serial>` et `bwt/<serial>/history`. Aucun identifiant n'est écrit dans ces messages au-delà du numéro de série déjà configuré dans HA.
 
 ### Alarmes
 

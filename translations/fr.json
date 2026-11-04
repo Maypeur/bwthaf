@@ -28,10 +28,10 @@
     "step": {
       "init": {
         "title": "Options BWT",
-        "description": "Configurez les intervalles de mise à jour",
+        "description": "Compte : {username}\nNuméro de série : {serial_number}\nNom : {device_name}\n\nIntervalles actuels : état {interval_main} s, consommation {interval_consumption} s.",
         "data": {
-          "interval_main": "Intervalle de mise à jour principal (secondes)",
-          "interval_consumption": "Intervalle de mise à jour consommation (secondes)"
+          "interval_main": "Intervalle de mise à jour principal",
+          "interval_consumption": "Intervalle de mise à jour consommation"
         }
       }
     }
